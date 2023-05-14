@@ -1,4 +1,4 @@
-
+# Use main.ipynb file in the Starte_Code folder for the solution
 
 # Loan Risk Classification using Machine Learning
 
