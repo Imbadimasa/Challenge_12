@@ -1,34 +1,56 @@
-# Use main.ipynb file in the Starter_Code folder for the solution
 
 
-# Module 12 Report 
+# Loan Risk Classification using Machine Learning
 
-## Overview of the Analysis
+## Overview
 
-In this section, describe the analysis you completed for the machine learning models used in this Challenge. This might include:
+The purpose of this analysis is to compare the performance of two machine learning models, Logistic Regression and RandomOverSampler, in classifying loan risk. In particular, we will compare the balanced accuracy, precision, and recall scores of the two models. Originally the data contained various features like loan size, interest rate, borrower income, etc. These features are typically used to predict whether the loan is going to deafault or not. which was provided in column 'loan_status' with 0 - no default, 1 - default. Based on this information, it is possible to build up a machine learning model that can predict whether the customer will default or not.
 
-* Explain the purpose of the analysis.
-* Explain what financial information the data was on, and what you needed to predict.
-* Provide basic information about the variables you were trying to predict (e.g., `value_counts`).
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any resampling method).
+### Variables used to predict:
+- model_lr - Logistic Regression - used the original data to make predictions
+- model_ros  - Random Over Sampler - generated synthetic data to improve the recall
+
+
+### Machine Learning Stages:
+1. Split the data into training(~75%) and testing (~25%)
+2. Train the model with the training data
+3. Predict the outcomes of the model by using the testing data
+4. Check the accuracy score
+5. Repeat the process fordifferent models and pick the model that suits the application in question
+
+### Models Used:
+
+Logistic Regression and RandomOverSampler are two different machine learning models that can be used for classification tasks.
+
+Logistic Regression is a statistical model that is commonly used for binary classification problems where the response variable is categorical and has two levels. It works by estimating the probability of an event occurring based on the values of the independent variables. It creates a decision boundary that separates the two classes and assigns a probability to each observation based on which side of the boundary it falls. The output of the model is a binary prediction that assigns each observation to one of the two classes.
+
+RandomOverSampler is a resampling technique that is commonly used to address imbalanced datasets. In classification tasks, an imbalanced dataset refers to a dataset where one class has significantly fewer observations than the other. This can cause problems for machine learning models because they may be biased towards the majority class and perform poorly on the minority class. RandomOverSampler addresses this problem by oversampling the minority class, which involves creating synthetic observations for the minority class by randomly duplicating existing observations. This helps to balance the dataset and improve the performance of the machine learning model.
 
 ## Results
 
-Using bulleted lists, describe the balanced accuracy scores and the precision and recall scores of all machine learning models.
+### RandomOverSampler
 
-* Machine Learning Model 1:
-  * Description of Model 1 Accuracy, Precision, and Recall scores.
+- Balanced accuracy score: 0.99
+- Precision and recall scores:
 
+    | Class | Precision | Recall | F1-Score |
+    | --- | --- | --- | --- |
+    | Healthy Loan | 1.00 | 0.99 | 1.00 |
+    | High Risk Loan | 0.84 | 0.99 | 0.91 |
+    
+### Logistic Regression
 
+- Balanced accuracy score: 0.95
+- Precision and recall scores:
 
-* Machine Learning Model 2:
-  * Description of Model 2 Accuracy, Precision, and Recall scores.
-
+    | Class | Precision | Recall | F1-Score |
+    | --- | --- | --- | --- |
+    | Healthy Loan | 1.00 | 0.99 | 1.00 |
+    | High Risk Loan | 0.85 | 0.91 | 0.88 |
+    
 ## Summary
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+Both models achieved high accuracy in classifying loan risk, with RandomOverSampler performing slightly better than logistic regression in terms of balanced accuracy and precision for the High Risk Loan class. RandomOverSampler performed better in recall for the High Risk Loan class, indicating that it was better at identifying actual High Risk Loans.
 
-If you do not recommend any of the models, please justify your reasoning.
+If correctly identifying all High Risk Loans is a higher priority, RandomOverSampler may be the better choice as it has a higher recall score for this class. The choice ultimately depends on the specific goals and priorities of the project. In this particular case RandomOverSampling is a better model to use, since we are trying to lower the amount of false negatives, since defaulted loans are high cost for the banks.
+
